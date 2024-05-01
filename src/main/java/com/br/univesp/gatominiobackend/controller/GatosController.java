@@ -34,7 +34,7 @@ public class GatosController {
     @PostMapping("/salvarGato")
     public ResponseEntity<RetornoGatoDTO> saveCatProfile(@RequestBody  CatProfile catProfile) {
         var dto = gatosService.salvarGato(catProfile);
-        return ResponseEntity.ok(dto    );
+        return ResponseEntity.ok(dto);
 
     }
 

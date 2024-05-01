@@ -34,6 +34,8 @@ public class RetornoGatoDTO {
         this.nome = catProfile.getNome();
         this.endereco = catProfile.getEndereco();
         this.tutor = catProfile.getTutor();
+        if (catProfile.getRegistroVeterinario() != null)
+            this.registroVeterinario = new RegistroVeterinarioDTO().retornaListaRegistrosDto(catProfile.getRegistroVeterinario());
 
     }
 

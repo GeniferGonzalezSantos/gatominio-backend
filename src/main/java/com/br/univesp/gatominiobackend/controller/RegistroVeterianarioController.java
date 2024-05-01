@@ -32,15 +32,15 @@ public class RegistroVeterianarioController {
         return ResponseEntity.ok(registroVeterinario);
     }
 
-    @PostMapping("/salvarRegistroVeterinario")
-    public ResponseEntity<RegistroVeterinario> saveRegistroVeterinario(@RequestBody RegistroVeterinarioDTO dto) {
-        CatProfile catProfile = gatosRepository.findById(dto.getIdGato()).get();
+    @PostMapping("/salvarRegistroVeterinario/{idGato}")
+    public ResponseEntity<RegistroVeterinarioDTO> saveRegistroVeterinario(@PathVariable(value = "idGato") Long idGato, @RequestBody RegistroVeterinarioDTO dto) {
+        CatProfile catProfile = gatosRepository.findById(idGato).get();
         RegistroVeterinario registroVeterinario = new RegistroVeterinario();
         registroVeterinario.setIdGato(catProfile);
         registroVeterinario.setDiagnostico(dto.getDiagnostico());
         registroVeterinario.setMotivo(dto.getMotivo());
         registroVeterinario.setTratamento(dto.getTratamento());
         registroVeterianarioRepository.save(registroVeterinario);
-        return ResponseEntity.created(URI.create("/buscarRegistroVeterinario/" + catProfile.getId())).body(registroVeterinario);
+        return ResponseEntity.created(URI.create("/buscarRegistroVeterinario/" + catProfile.getId())).body(new RegistroVeterinarioDTO(registroVeterinario));
     }
 }

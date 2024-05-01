@@ -8,6 +8,7 @@ import com.br.univesp.gatominiobackend.repository.RegistroVeterianarioRepository
 import com.br.univesp.gatominiobackend.service.GatosService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class GatosServiceImpl implements GatosService {
@@ -24,23 +25,26 @@ public class GatosServiceImpl implements GatosService {
     public RetornoGatoDTO buscarGato(Long idGato) {
         var catProfile = gatosRepository.findById(idGato);
         RetornoGatoDTO retornoGatoDTO = new RetornoGatoDTO(catProfile.get());
-        var registroVeterinario = registroVeterianarioRepository.findByIdGato_id(idGato);
-
-        if (registroVeterinario.get(0) != null) {
-            var registroVeterinarioDto = new RegistroVeterinarioDTO(registroVeterinario);
-            retornoGatoDTO.addRegistroVeterinario(registroVeterinarioDto);
-        }
         return retornoGatoDTO;
 
     }
 
     @Override
     public List<RetornoGatoDTO> listarGatos() {
-        return List.of();
+        var dtoList = new ArrayList<RetornoGatoDTO>();
+        var listaGatos = gatosRepository.findAll();
+        for (CatProfile catProfile : listaGatos) {
+            var retornoGatoDTO = new RetornoGatoDTO(catProfile);
+
+            dtoList.add(retornoGatoDTO);
+        }
+        return dtoList;
     }
 
     @Override
     public RetornoGatoDTO salvarGato(CatProfile catProfile) {
-        return null;
+        gatosRepository.save(catProfile);
+        var dto = new RetornoGatoDTO(catProfile);
+        return dto;
     }
 }
