@@ -21,6 +21,7 @@ public class RetornoGatoDTO {
     private String nome;
     private String endereco;
     private String tutor;
+    private String link_foto;
     private List<RegistroVeterinarioDTO> registroVeterinario = new ArrayList<>();
 
 
@@ -34,6 +35,7 @@ public class RetornoGatoDTO {
         this.nome = catProfile.getNome();
         this.endereco = catProfile.getEndereco();
         this.tutor = catProfile.getTutor();
+        this.link_foto = catProfile.getFotoPerfil();
         if (catProfile.getRegistroVeterinario() != null)
             this.registroVeterinario = new RegistroVeterinarioDTO().retornaListaRegistrosDto(catProfile.getRegistroVeterinario());
 

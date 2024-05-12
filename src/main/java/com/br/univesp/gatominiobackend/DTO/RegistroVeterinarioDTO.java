@@ -17,7 +17,7 @@ public class RegistroVeterinarioDTO {
     private String diagnostico;
     private String motivo;
     private String tratamento;
-
+    private String dataConsulta;
     public RegistroVeterinarioDTO() {
     }
 
@@ -26,6 +26,7 @@ public class RegistroVeterinarioDTO {
             this.diagnostico = registro.getDiagnostico();
             this.motivo = registro.getMotivo();
             this.tratamento = registro.getTratamento();
+            this.dataConsulta = registro.getDataConsulta();
         }
     }
 
@@ -43,6 +44,7 @@ public class RegistroVeterinarioDTO {
             dto.setDiagnostico(registro.getDiagnostico());
             dto.setMotivo(registro.getMotivo());
             dto.setTratamento(registro.getTratamento());
+            dto.setDataConsulta(registro.getDataConsulta());
             listaDtos.add(dto);
         }
         return listaDtos;

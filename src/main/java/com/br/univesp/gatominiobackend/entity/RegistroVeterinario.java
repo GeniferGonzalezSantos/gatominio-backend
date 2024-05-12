@@ -31,4 +31,6 @@ public class RegistroVeterinario {
     
     private String tratamento;
 
+
+    private String dataConsulta;
 }

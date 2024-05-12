@@ -30,6 +30,8 @@ public class CatProfile {
     private String endereco;
     @Column(name = "nome_tutor")
     private String tutor;
+    @Column(name = "foto_perfil")
+    private String fotoPerfil;
 
     @OneToMany(mappedBy = "idGato", cascade = CascadeType.ALL )
     private List<RegistroVeterinario> registroVeterinario;

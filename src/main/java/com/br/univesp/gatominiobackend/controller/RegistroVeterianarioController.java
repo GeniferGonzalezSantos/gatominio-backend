@@ -7,10 +7,7 @@ import com.br.univesp.gatominiobackend.repository.GatosRepository;
 import com.br.univesp.gatominiobackend.repository.RegistroVeterianarioRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
@@ -25,6 +22,7 @@ public class RegistroVeterianarioController {
         this.registroVeterianarioRepository = registroVeterianarioRepository;
         this.gatosRepository = gatosRepository;
     }
+    @CrossOrigin
     @GetMapping("/buscarRegistroVeterinario/{idGato}")
     public ResponseEntity<List<RegistroVeterinario>> searchRegistroVeterinario(@PathVariable(value = "idGato") Long idGato) {
 
@@ -32,6 +30,7 @@ public class RegistroVeterianarioController {
         return ResponseEntity.ok(registroVeterinario);
     }
 
+    @CrossOrigin
     @PostMapping("/salvarRegistroVeterinario/{idGato}")
     public ResponseEntity<RegistroVeterinarioDTO> saveRegistroVeterinario(@PathVariable(value = "idGato") Long idGato, @RequestBody RegistroVeterinarioDTO dto) {
         CatProfile catProfile = gatosRepository.findById(idGato).get();
@@ -40,6 +39,7 @@ public class RegistroVeterianarioController {
         registroVeterinario.setDiagnostico(dto.getDiagnostico());
         registroVeterinario.setMotivo(dto.getMotivo());
         registroVeterinario.setTratamento(dto.getTratamento());
+        registroVeterinario.setDataConsulta(dto.getDataConsulta());
         registroVeterianarioRepository.save(registroVeterinario);
         return ResponseEntity.created(URI.create("/buscarRegistroVeterinario/" + catProfile.getId())).body(new RegistroVeterinarioDTO(registroVeterinario));
     }
