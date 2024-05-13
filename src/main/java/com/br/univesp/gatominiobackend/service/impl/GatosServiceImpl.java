@@ -59,6 +59,11 @@ public class GatosServiceImpl implements GatosService {
         return dto;
     }
 
+    @Override
+    public void excluirGato(Long idGato) {
+        gatosRepository.deleteById(idGato);
+    }
+
     public void handleCatImage(CatProfile catProfile, MultipartFile image) {
         try {
             // Define the directory where the image will be saved

@@ -68,5 +68,12 @@ public class GatosController {
         return ResponseEntity.ok(dto);
 
     }
+    @CrossOrigin(origins = "*")
+    @DeleteMapping(value = "/excluirGato/{idGato}")
+    public ResponseEntity<String> deleteCatProfile(@PathVariable(value = "idGato") Long idGato) {
+         gatosService.excluirGato(idGato);
+        return ResponseEntity.ok("Excluido com sucesso");
+
+    }
 
 }

@@ -12,4 +12,6 @@ public interface GatosService {
    RetornoGatoDTO salvarGatoComFoto(CatProfile catProfile, MultipartFile image);
 
    RetornoGatoDTO salvarGato(CatProfile catProfile);
+
+    void excluirGato(Long idGato);
 }
